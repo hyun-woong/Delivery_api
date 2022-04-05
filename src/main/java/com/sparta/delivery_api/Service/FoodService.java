@@ -1,7 +1,7 @@
 package com.sparta.delivery_api.Service;
 
-import com.sparta.delivery_api.Dto.FoodListDto;
-import com.sparta.delivery_api.Dto.FoodResponseDto;
+import com.sparta.delivery_api.Dto.FoodList.FoodListDto;
+import com.sparta.delivery_api.Dto.FoodList.FoodResponseDto;
 import com.sparta.delivery_api.Entity.FoodList;
 import com.sparta.delivery_api.Entity.StoreInfo;
 import com.sparta.delivery_api.Repository.FoodRepository;

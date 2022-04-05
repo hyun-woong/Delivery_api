@@ -11,20 +11,12 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Orders {
+public class Orders { //음식 주문 테이블
+
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long ordersId;
-
-    @ManyToOne
-    @JoinColumn
-    private FoodOrders foodOrders;
-
-    @Column(nullable = false)
-    private int totalPrice;
-    //배달비 + 음식가격
-
+    private Long OrdersId;
 
 
 

@@ -1,10 +1,8 @@
 package com.sparta.delivery_api.Controller;
 
-import com.sparta.delivery_api.Dto.FoodListDto;
-import com.sparta.delivery_api.Dto.FoodResponseDto;
-import com.sparta.delivery_api.Entity.FoodList;
+import com.sparta.delivery_api.Dto.FoodList.FoodListDto;
+import com.sparta.delivery_api.Dto.FoodList.FoodResponseDto;
 import com.sparta.delivery_api.Service.FoodService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -212,7 +212,7 @@ class OrderIntegrationTest {
 
         // 음식 주문 확인
         assertEquals(3, orderDto.foods.size());
-        // 음식1 주문 확인
+        // 음식1 주문 확인FoodOrderRequestDto
         FoodOrderDto foodOrder1 = orderDto.foods.stream()
                 .filter(foodOrderDto -> foodOrderDto.name.equals(food1.getName()))
                 .findAny().orElse(null);
