@@ -1,5 +1,6 @@
 package com.sparta.delivery_api.Dto.Orders;
 
+import com.sparta.delivery_api.Entity.OrderDetailed;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +11,9 @@ public class FoodOrderDto {
     int quantity;
     int price;
 
-    public FoodOrderDto(String foodName, int foodprice) {
-        this.name = foodName;
-        this.price = foodprice;
+    public FoodOrderDto(OrderDetailed orderDetailed) {
+        this.name = orderDetailed.getName();
+        this.quantity = orderDetailed.getQuantity();
+        this.price = orderDetailed.getPrice();
     }
 }
