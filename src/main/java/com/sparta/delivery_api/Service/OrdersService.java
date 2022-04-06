@@ -48,38 +48,34 @@ public class OrdersService {
 //        List<FoodOrderRequestDto> foodOrderRequestDtos = new ArrayList<>();
 
         //음식수량 필터링 및 메뉴ID, 수량 Get
-        for (FoodOrderRequestDto foodOrderRequestDto : foodID_quantity){
-            if (foodOrderRequestDto.getQuantity() > 100 || foodOrderRequestDto.getQuantity() < 1){
+        for (FoodOrderRequestDto foodOrderRequestDto : foodID_quantity) {
+            if (foodOrderRequestDto.getQuantity() > 100 || foodOrderRequestDto.getQuantity() < 1) {
                 throw new NullPointerException("주문 수량이 실화이십니까?");
             }
             Long foodId = foodOrderRequestDto.getId();
-//            int quantity = foodOrderRequestDto.getQuantity();
-
-//            FoodOrderRequestDto foodOrderRequestDto1 = new FoodOrderRequestDto(foodId, quantity);
-//            foodOrderRequestDtos.add(foodOrderRequestDto1);
 
             List<FoodResponseDto> foodResponseDtos = foodService.getFoodList(orderRequestDto.getRestaurantId());
-            for (FoodResponseDto foodlist : foodResponseDtos){
-                if (!foodlist.getId().equals(foodId)){
+            for (FoodResponseDto foodlist : foodResponseDtos) {
+                if (!foodlist.getId().equals(foodId)) {
                     continue;
                 }
-                    String foodName = foodlist.getName();
-                    int quantity = foodOrderRequestDto.getQuantity();
-                    int foodprice = foodlist.getPrice() * quantity;
+                String foodName = foodlist.getName();
+                int quantity = foodOrderRequestDto.getQuantity();
+                int foodprice = foodlist.getPrice() * quantity;
 
 
-                    OrderDetailed orderDetailed = new OrderDetailed(foodName, foodprice, quantity);
-                    orderDetaileds.add(orderDetailed);
-                    foodOrderDtos.add(new FoodOrderDto(orderDetailed));
+                OrderDetailed orderDetailed = new OrderDetailed(foodName, foodprice, quantity);
+                orderDetaileds.add(orderDetailed);
+                foodOrderDtos.add(new FoodOrderDto(orderDetailed));
 
-                    System.out.println("음식명: " + orderDetailed.getName());
-                    System.out.println("음식가격: " + orderDetailed.getPrice());
-                    System.out.println("음식수량: " + orderDetailed.getQuantity());
+                System.out.println("음식명: " + orderDetailed.getName());
+                System.out.println("음식가격: " + orderDetailed.getPrice());
+                System.out.println("음식수량: " + orderDetailed.getQuantity());
             }
         }
 
         int sumFoodPrice = 0;
-        for (FoodOrderDto foodInfo : foodOrderDtos){
+        for (FoodOrderDto foodInfo : foodOrderDtos) {
             sumFoodPrice += foodInfo.getPrice();
         }
 
@@ -95,12 +91,29 @@ public class OrdersService {
         System.out.println("배달팁 : " + orders.getDeliveryFee());
         System.out.println("총 가격 : " + orders.getTotalPrice());
 
-        if (sumFoodPrice < storeInfo.getMinOrderPrice()){
+        if (sumFoodPrice < storeInfo.getMinOrderPrice()) {
             throw new NullPointerException("최소주문 금액 미달입니다.");
         }
 
         ordersRepository.save(orders);
 
         return new OrderDto(orders, foodOrderDtos);
+    }
+
+    @Transactional
+    public List<OrderDto> getOrders() {
+        List<Orders> orders = ordersRepository.findAll();
+        List<OrderDto> orderDtos = new ArrayList<>();
+
+        for (Orders orders1 : orders) {
+            List<FoodOrderDto> foodOrderDtos = new ArrayList<>();
+            for (OrderDetailed orderDetailed : orders1.getOrderDetailed()) {
+                FoodOrderDto foodOrderDto = new FoodOrderDto(orderDetailed);
+                foodOrderDtos.add(foodOrderDto);
+            }
+            OrderDto orderDto = new OrderDto(orders1, foodOrderDtos);
+            orderDtos.add(orderDto);
+        }
+        return orderDtos;
     }
 }
