@@ -9,4 +9,9 @@ public class FoodOrderDto {
     String name;
     int quantity;
     int price;
+
+    public FoodOrderDto(String foodName, int foodprice) {
+        this.name = foodName;
+        this.price = foodprice;
+    }
 }

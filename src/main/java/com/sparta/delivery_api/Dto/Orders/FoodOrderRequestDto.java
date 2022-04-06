@@ -8,4 +8,9 @@ import lombok.Setter;
 public class FoodOrderRequestDto {
     Long id;
     int quantity;
+
+    public FoodOrderRequestDto(Long id, int quantity){
+        this.id = id;
+        this.quantity = quantity;
+    }
 }

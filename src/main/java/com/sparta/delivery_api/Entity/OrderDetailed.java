@@ -24,34 +24,16 @@ public class OrderDetailed {
     private String name;
 
     @Column
-    private String storeName;
-
-    @Column
     private int price;
 
     @Column
     private int quantity;
 
-    @Column
-    private String foodname;
 
-    @Column
-    private int deliveryFee;
-
-    @Column
-    private int totalPrice;
-
-    @Column
-    private int minOrderPrice;
-
-    public OrderDetailed(String storeName, String name, int price, int quantity, int deliveryFee, int totalPrice, int minOrderPrice){
-        this.storeName = storeName;
+    public OrderDetailed(String name, int price, int quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.deliveryFee = deliveryFee;
-        this.totalPrice = totalPrice;
-        this.minOrderPrice = minOrderPrice;
     }
 
 }
